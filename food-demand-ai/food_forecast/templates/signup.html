@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ecf0f1;
+            padding: 20px;
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        input, select, button {
+            display: block;
+            width: 100%;
+            margin: 10px 0 15px 0;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #d35400;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Signup</h2>
+<form method="POST">
+    {% csrf_token %}
+    Username
+    <input type="text" name="username">
+
+    Password
+    <input type="password" name="password">
+
+    Role
+    <select name="role">
+        <option value="manager">Manager</option>
+        <option value="staff">Staff</option>
+    </select>
+
+    <button type="submit">Create Account</button>
+</form>
+
+</body>
+</html>

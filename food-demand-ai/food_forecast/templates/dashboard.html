@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0 20px;
+            color: #333;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 30px;
+        }
+        form {
+            background-color: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+        input, select, button {
+            display: block;
+            width: 100%;
+            margin: 8px 0 15px 0;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #2980b9;
+        }
+        canvas {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="chart"></canvas>
+
+<script>
+var ctx = document.getElementById('chart');
+new Chart(ctx,{
+    type:'line',
+    data:{
+        labels: {{labels|safe}},
+        datasets:[
+            {
+                label: 'Actual Orders',
+                data: {{data|safe}},
+                borderColor: 'blue',
+                fill: false
+            },
+            {
+                label: 'Predicted Orders',
+                data: {{pred_data|safe}},
+                borderColor: 'red',
+                fill: false
+            }
+        ]
+    }
+});
+</script>
+
+<h2>Add Sales Data</h2>
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Save</button>
+</form>
+
+<h2>Upload Dataset</h2>
+<a href="{% url 'upload' %}">Go to Upload Page</a>
+
+<h2>Prediction</h2>
+<a href="/predict/">Prediction Page</a>
+
+<h2>Inventory Planning</h2>
+<a href="/inventory/">Inventory Page</a>
+
+<br><br>
+<a href="/logout/">Logout</a>
+
+</body>
+</html>
